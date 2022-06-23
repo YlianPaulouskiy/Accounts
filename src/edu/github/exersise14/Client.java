@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -27,12 +29,12 @@ public class Client {
     public Client(String name, int age) {
         this.name = name;
         this.age = age;
-        accountList = Collections.emptyList();
+        accountList = new ArrayList<>();
     }
 
-    public void addAccount(Account account) {
-        if (account != null) {
-            accountList.add(account);
+    public void addAccount(Account ...accounts) {
+        if (accounts!= null) {
+            Collections.addAll(accountList, accounts);
         }
     }
 
@@ -72,5 +74,13 @@ public class Client {
 
     public long getSumFromNegativeAccounts() {
         return accountList.stream().filter(account -> account.getMoney() < 0).mapToInt(Account::getMoney).sum();
+    }
+
+    @Override
+    public String toString() {
+        return "Client " +
+                "name: " + name +
+                ", age = " + age +
+                ", accountList: " + accountList + "\n";
     }
 }

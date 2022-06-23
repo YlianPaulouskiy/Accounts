@@ -4,23 +4,28 @@ package edu.github.exersise14.bank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 import java.util.Objects;
 import java.util.Random;
 
 @NoArgsConstructor
 @Getter
+
 public class Account implements Comparable<Account> {
 
 
-    private final String accountNumber = "";
+    private String accountNumber;
     private int money;
     private boolean isBlocked;
 
+
     public Account(int money) {
+        StringBuilder accountNumber = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < 13; i++) {
-            accountNumber.concat(String.valueOf(random.nextInt(10)));
+            accountNumber.append(random.nextInt(10));
         }
+        this.accountNumber = accountNumber.toString();
         this.money = money;
         this.isBlocked = false;
     }
@@ -65,5 +70,13 @@ public class Account implements Comparable<Account> {
     @Override
     public int hashCode() {
         return Objects.hash(accountNumber, money, isBlocked);
+    }
+
+
+    @Override
+    public String toString() {
+        return "accountNumber: " + accountNumber +
+                ", money: " + money +
+                ", isBlocked: " + isBlocked + "\n";
     }
 }
